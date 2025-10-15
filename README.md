@@ -11,7 +11,7 @@ the **[Bose News App Template](https://preview.themeforest.net/item/bose-new-pub
 
 | Team Member | Assigned Screen | UI Responsibilities | Firebase/NewsAPI Usage |
 |--------------|----------------|---------------------|------------------------|
-| **Hossam Ahmed Ali** | **Sign Up Screen& Home Screen** | Design the registration screen using XML — fields for full name, email, and password with form validation. | Uses **Firebase Authentication** to create a new user. |
+| **Hossam Ahmed Ali** | **Sign Up Screen & Home Screen** | Design the registration screen using XML — fields for full name, email, and password with form validation. | Uses **Firebase Authentication** to create a new user. |
 | **Yousseif Mohamed Ali** | **Sign In Screen** | Create login screen with email & password fields, and “Forgot Password?” link. | Uses **Firebase Auth signInWithEmailAndPassword()**. |
 | **Yousseif Alaa** | **Forget Password Screen** | Build a simple UI where users can enter their email to reset the password. | Uses **Firebase sendPasswordResetEmail()** method. |
 | **Essam Mohamed** | **Settings Screen** | Create the settings UI for profile updates, theme toggle (dark/light), and account actions like logout. | Uses **Firebase Auth** for profile info and logout. |
