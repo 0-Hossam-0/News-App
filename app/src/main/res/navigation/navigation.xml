@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_1"
+    app:startDestination="@id/logIn">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.newsappproject.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/logIn"
+        android:name="com.example.newsappproject.LogIn"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_logIn_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_logIn_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.newsappproject.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_signUp_to_logIn"
+            app:destination="@id/logIn" />
+    </fragment>
+</navigation>

@@ -10,6 +10,8 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.newsappproject.databinding.ActivityMainBinding
 import com.example.newsappproject.databinding.FragmentSignUpBinding
 import com.google.firebase.FirebaseApp
@@ -52,12 +54,12 @@ class SignUp : Fragment() {
             Pair(passwordEt, passwordErrTv),
             Pair(repeatPasswordEt, repeatPasswordErrTv)
         )
-    val inputNames = listOf(
-        "name",
-        "email",
-        "password",
-        "repeat_password"
-    )
+        val inputNames = listOf(
+            "name",
+            "email",
+            "password",
+            "repeat_password"
+        )
 
         var isValid = true
         for (index in 0..inputNames.size - 1){
@@ -74,11 +76,7 @@ class SignUp : Fragment() {
                 toggleLoadingStateUI(false)
                 when {
                     task.isSuccessful -> {
-                        inputFields.forEach { setSuccessUI(it) }
-                        successTextView.setText("Account created successfully!")
-                        successTextView.setTextColor(ContextCompat.getColor(requireContext(), R.color.success_text))
-                        resetInputs()
-
+                        findNavController().navigate(R.id.action_signUp_to_homeFragment)
                     }
                     task.exception is com.google.firebase.auth.FirebaseAuthUserCollisionException -> {
                         setErrorUI(Pair(emailEt, emailErrTv), "Email already exists. Please log in instead")
@@ -107,6 +105,10 @@ class SignUp : Fragment() {
         repeatPasswordEt.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) validateSingleInput(repeatPasswordEt, repeatPasswordErrTv, "repeat_password")
         }
+
+        binding.logInBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_signUp_to_logIn)
+        }
     }
 
     private fun setErrorUI(pair :Pair<EditText, TextView>, errorMessage: String){
@@ -115,19 +117,12 @@ class SignUp : Fragment() {
     }
     private fun setSuccessUI(pair :Pair<EditText, TextView>){
         pair.first.background = ContextCompat.getDrawable(requireContext(), R.drawable.edittext_success_border)
-        pair.second.setText("")
+        pair.second.text = ""
     }
 
     private fun toggleLoadingStateUI(isLoading: Boolean){
         loadingPb.visibility = if (isLoading) View.VISIBLE else View.GONE
         signUpBtn.isEnabled = !isLoading
-    }
-
-    private fun resetInputs(){
-        nameEt.setText("")
-        emailEt.setText("")
-        passwordEt.setText("")
-        repeatPasswordEt.setText("")
     }
 
     private fun validateSingleInput(editText: EditText, errorText: TextView, type: String) : Boolean {
