@@ -1,59 +1,47 @@
 package com.example.newsappproject
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.newsappproject.databinding.FragmentHomeBinding
+import com.example.newsappproject.databinding.FragmentSignUpBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+
+        val categories = listOf(
+            CategoryData("Health", R.drawable.health, R.drawable.health_icon, Color.parseColor("#f78c0c"),Color.parseColor("#fec90c")),
+            CategoryData("Sports", R.drawable.sport, R.drawable.sports_icon, Color.parseColor("#5ca793"),Color.parseColor("#81dac3")),
+            CategoryData("Politics", R.drawable.politics, R.drawable.politics_icon,Color.parseColor("#f44818"),Color.parseColor("#f79d19")),
+            CategoryData("World", R.drawable.world, R.drawable.world_icon,Color.parseColor("#f44818"),Color.parseColor("#d5331f")),
+            CategoryData("Technology", R.drawable.technology, R.drawable.technology_icon,Color.parseColor("#a2b86c"),Color.parseColor("#bad86e")),
+            CategoryData("Fashion", R.drawable.fashion, R.drawable.fashion_icon,Color.parseColor("#f78c0c"),Color.parseColor("#fec90c")),
+        )
+
+        val adapter = CategoryAdapter(categories)
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
