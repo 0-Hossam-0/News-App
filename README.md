@@ -60,4 +60,3 @@ the **[Bose News App Template](https://preview.themeforest.net/item/bose-new-pub
 - Yousseif Alaa  
 - Essam Mohamed  
 - Kirolos Emad
-
