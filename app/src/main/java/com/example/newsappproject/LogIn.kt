@@ -55,7 +55,9 @@ class LogIn : Fragment() {
             val allValid = isInputsValid["email"] == true && isInputsValid["password"] == true
             binding.logInBtn.isEnabled = allValid
         }
-
+        binding.forgetPasswordBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_logIn_to_resetPasswordFragment4)
+        }
     }
 
     private fun setErrorUI(pair :Pair<EditText, TextView>){
@@ -125,10 +127,10 @@ class LogIn : Fragment() {
                     val exception = task.exception
                     when (exception) {
                         is com.google.firebase.auth.FirebaseAuthInvalidCredentialsException, is com.google.firebase.auth.FirebaseAuthInvalidUserException -> {
-                            errorTextView.text = "Invalid email or password"
+                            errorTextView?.text = "Invalid email or password"
                         }
                         else -> {
-                            errorTextView.text = "Something went wrong: ${exception?.message}"
+                            errorTextView?.text = "Something went wrong: ${exception?.message}"
                         }
                     }
                     Log.e("LogIn", "Error: ${exception?.message}")
