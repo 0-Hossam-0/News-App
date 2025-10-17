@@ -3,9 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:padding="20dp"
     tools:context=".SignUp">
 
     <Space
@@ -117,8 +116,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
-    <com.google.android.material.button.MaterialButton
-        app:cornerRadius="12dp"
+    <Button
         android:id="@+id/signUp_btn"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -150,7 +148,6 @@
         android:text="Log In"
         android:textColor="@color/sky_blue"
         android:textSize="14sp"
-        android:id="@+id/logIn_btn"
         />
 
 
