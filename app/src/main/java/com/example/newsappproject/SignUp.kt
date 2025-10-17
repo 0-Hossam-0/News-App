@@ -8,15 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.newsappproject.databinding.ActivityMainBinding
 import com.example.newsappproject.databinding.FragmentSignUpBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
-
+import android.os.Handler
+import android.os.Looper
 class SignUp : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
@@ -32,6 +31,7 @@ class SignUp : Fragment() {
     private val signUpBtn get() = binding.signUpBtn
     private val loadingPb get() = binding.loadingPb
     private val repeatPasswordErrTv get() = binding.repeatPasswordErrTv
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,6 +76,10 @@ class SignUp : Fragment() {
                 toggleLoadingStateUI(false)
                 when {
                     task.isSuccessful -> {
+                        successTextView.setText("Account created successfully!")
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            findNavController().navigate(R.id.action_signUp_to_homeFragment)
+                        }, 2000)
                         findNavController().navigate(R.id.action_signUp_to_homeFragment)
                     }
                     task.exception is com.google.firebase.auth.FirebaseAuthUserCollisionException -> {
