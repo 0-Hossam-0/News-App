@@ -36,16 +36,12 @@ class LogIn : Fragment() {
     private fun setupListeners() {
         binding.logInBtn.setOnClickListener { handleLogIn() }
 
-        binding.emailEt.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateSingleInput(binding.emailEt, binding.emailErrTv, "email")
-        }
-
-        binding.passwordEt.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) validateSingleInput(binding.passwordEt, binding.passwordErrTv, "password")
-        }
-
         binding.signUpBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_logIn_to_signUp)
+        }
+
+        binding.forgetPasswordBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_logIn_to_resetPasswordFragment4)
         }
     }
 
@@ -63,56 +59,8 @@ class LogIn : Fragment() {
         binding.logInBtn.isEnabled = !isLoading
     }
 
-    private fun validateSingleInput(
-        editText: EditText,
-        errorText: TextView,
-        type: String
-    ): Boolean {
-        val value = editText.text.toString().trim()
-
-        if (value.isEmpty()) {
-            setErrorUI(Pair(editText, errorText), "Empty field")
-            return false
-        }
-
-        var isValid = true
-        when(type){
-            "email" -> {
-                if (!android.util.Patterns.EMAIL_ADDRESS.matcher(value).matches()) {
-                    isValid = false
-                    setErrorUI(Pair(editText, errorText), "Invalid email address")
-                } else {
-                    setSuccessUI(Pair(editText, errorText))
-                }
-            }
-
-            "password" -> {
-                if (value.length < 6) {
-                    setErrorUI(Pair(editText, errorText), "Password must be at least 6 characters")
-                    isValid = false
-                } else {
-                    setSuccessUI(Pair(editText, errorText))
-                }
-            }
-        }
-        return isValid
-    }
-
     private fun handleLogIn() {
-        val inputFields = listOf(
-            Pair(binding.emailEt, binding.emailErrTv),
-            Pair(binding.passwordEt, binding.passwordErrTv),
-        )
-        val inputNames = listOf(
-            "email",
-            "password"
-        )
 
-        var isValid = true
-        for (index in 0 until inputNames.size){
-            isValid = validateSingleInput(inputFields[index].first,inputFields[index].second, inputNames[index]) && isValid
-        }
-        if (!isValid) return
         toggleLoadingStateUI(true)
 
         val emailStr = binding.emailEt.text.toString().trim()
@@ -125,8 +73,8 @@ class LogIn : Fragment() {
                     task.isSuccessful -> {
                         findNavController().navigate(R.id.action_logIn_to_homeFragment)
                     }
-                    task.exception is com.google.firebase.auth.FirebaseAuthUserCollisionException -> {
-                        setErrorUI(inputFields.first(), "Email already exists. Please log in instead")
+                    task.exception is com.google.firebase.auth.FirebaseAuthInvalidUserException -> {
+                        setErrorUI(Pair(binding.emailEt, binding.emailErrTv), "Invalid")
                     }
                     else -> {
                         successTextView.setText("Something went wrong")
