@@ -1,9 +1,18 @@
+import java.io.FileInputStream
+import java.io.IOException
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
 }
-
+val localProperties = Properties()
+try {
+    localProperties.load(FileInputStream(rootProject.file("local.properties")))
+} catch (e: IOException) {
+    e.printStackTrace()
+}
 android {
     namespace = "com.example.newsappproject"
     compileSdk = 36
@@ -16,8 +25,14 @@ android {
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        val apiKey = localProperties.getProperty("apiKey")
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+        val baseUrl = localProperties.getProperty("baseUrl")
+        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+
     }
     buildFeatures{
+        buildConfig = true
         viewBinding = true
     }
     buildTypes {
@@ -33,6 +48,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
@@ -45,8 +61,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation(libs.firebase.auth)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.lifecycle.livedata.ktx)

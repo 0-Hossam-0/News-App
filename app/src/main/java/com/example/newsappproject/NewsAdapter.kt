@@ -1,24 +1,35 @@
 package com.example.newsappproject
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.newsappproject.databinding.FragmentFavourites2Binding
-import com.example.newsappproject.databinding.FragmentNewsBinding
-
-class NewsAdapter(private val newsList: List<NewsData>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): NewsViewHolder {
-        TODO("Not yet implemented")
+        val binding = FragmentFavourites2Binding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return NewsViewHolder(binding)
     }
 
     override fun onBindViewHolder(
         holder: NewsViewHolder,
         position: Int
     ) {
-        TODO("Not yet implemented")
+        val news = newsList[position]
+
+        holder.articleText?.text = news.title
+        Glide.with(holder.itemView.context)
+            .load(news.urlToImage)
+            .into(holder.articleImage!!)
+        holder.dateText?.text = news.publishedAt
+        holder.userName?.text = news.author
     }
 
     override fun getItemCount(): Int = newsList.size
@@ -28,7 +39,6 @@ class NewsAdapter(private val newsList: List<NewsData>) : RecyclerView.Adapter<N
         val articleText = binding.articleText
         val dateText = binding.dateText
         val userName = binding.userName
-        val userIcon = binding.userIcon
     }
 
 

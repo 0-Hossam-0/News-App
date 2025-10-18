@@ -26,6 +26,7 @@ class FavouritesFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
+
     }
 
     override fun onDestroyView() {
