@@ -31,11 +31,11 @@ class NewsFragment : Fragment() {
         val newsCallable = retrofit.create(NewsCallable::class.java)
         val category = arguments?.getString("category") ?: "general"
 
-        // Safely get the countries from SharedPreferences
+        binding.progress.visibility = View.VISIBLE
         val sharedPrefs = requireContext().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val countries = sharedPrefs.getStringSet("selected_countries", emptySet()) ?: emptySet()
 
-        // Combine them into a single, clean query string
+
         val queryParts = mutableListOf(category)
         queryParts.addAll(countries)
         val finalQuery = queryParts.joinToString(" OR ")
@@ -52,12 +52,12 @@ class NewsFragment : Fragment() {
                         binding.newsList.adapter = NewsAdapter(newsList)
                     } else {
                         Log.e("NewsFragment", "Received empty or null articles list")
-                        binding.newsList.adapter = NewsAdapter(emptyList()) // Use empty list to attach adapter
+                        binding.newsList.adapter = NewsAdapter(emptyList())
                         Toast.makeText(requireContext(), "No articles available", Toast.LENGTH_SHORT).show()
                     }
                 } else {
                     Log.e("NewsFragment", "Response not successful: ${response.code()}")
-                    binding.newsList.adapter = NewsAdapter(emptyList()) // Use empty list in error case
+                    binding.newsList.adapter = NewsAdapter(emptyList())
                     Toast.makeText(requireContext(), "Failed to retrieve news", Toast.LENGTH_SHORT).show()
                 }
                 binding.progress.visibility = View.GONE
@@ -68,7 +68,7 @@ class NewsFragment : Fragment() {
                 t: Throwable
             ) {
                 Log.e("NewsFragment", "Failed to load news", t)
-                binding.newsList.adapter = NewsAdapter(emptyList()) // Attach adapter on failure
+                binding.newsList.adapter = NewsAdapter(emptyList())
                 Toast.makeText(requireContext(), "Failed to load news", Toast.LENGTH_SHORT).show()
                 binding.progress.visibility = View.GONE
             }

@@ -15,6 +15,7 @@ try {
 }
 android {
     namespace = "com.example.newsappproject"
+
     compileSdk = 36
 
     defaultConfig {
@@ -32,10 +33,14 @@ android {
 
     }
     buildFeatures{
-        buildConfig = true
         viewBinding = true
+        buildConfig = true
     }
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://newsapi.org/\"")
+            buildConfigField("String", "API_KEY", "\"18c1da8e5e6c41e0bc5a0e5cff66a9c4\"")
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -64,6 +69,8 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.1.1")
     implementation(libs.firebase.auth)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.lifecycle.livedata.ktx)

@@ -1,7 +1,13 @@
 package com.example.newsappproject
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsappproject.databinding.FragmentFavourites2Binding
@@ -30,7 +36,20 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
             .into(holder.articleImage!!)
         holder.dateText?.text = news.publishedAt?: "Unknown date"
         holder.userName?.text = news.author?: "Unknown author"
-    }
+        holder.itemView.setOnClickListener {
+            val rawUrl = news.url
+            if (rawUrl.isNullOrBlank()) return@setOnClickListener
+
+            val url = if (!rawUrl.startsWith("http")) "https://$rawUrl" else rawUrl
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+            try {
+                holder.itemView.context.startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+            }
+        }
+        }
+
+
 
     override fun getItemCount(): Int = newsList.size
 
