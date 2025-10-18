@@ -16,7 +16,7 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import android.os.Handler
 import android.os.Looper
-class SignUp : Fragment() {
+class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var auth: FirebaseAuth
@@ -78,9 +78,9 @@ class SignUp : Fragment() {
                     task.isSuccessful -> {
                         successTextView.setText("Account created successfully!")
                         Handler(Looper.getMainLooper()).postDelayed({
-                            findNavController().navigate(R.id.action_signUp_to_homeFragment)
+                            findNavController().navigate(R.id.LoginFragment)
                         }, 2000)
-                        findNavController().navigate(R.id.action_signUp_to_homeFragment)
+                        findNavController().navigate(R.id.LoginFragment)
                     }
                     task.exception is com.google.firebase.auth.FirebaseAuthUserCollisionException -> {
                         setErrorUI(Pair(emailEt, emailErrTv), "Email already exists. Please log in instead")
@@ -111,7 +111,7 @@ class SignUp : Fragment() {
         }
 
         binding.logInBtn.setOnClickListener {
-            it.findNavController().navigate(R.id.action_signUp_to_logIn)
+            it.findNavController().navigate(R.id.LoginFragment)
         }
     }
 

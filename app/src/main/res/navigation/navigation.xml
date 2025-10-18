@@ -3,52 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_1"
-    app:startDestination="@id/logIn">
+    app:startDestination="@id/LoginFragment">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/HomeFragment"
         android:name="com.example.newsappproject.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
+            app:destination="@id/NewsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/logIn"
-        android:name="com.example.newsappproject.LogIn"
+        android:id="@+id/LoginFragment"
+        android:name="com.example.newsappproject.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_logIn_to_signUp"
-            app:destination="@id/signUp" />
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_logIn_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/HomeFragment" />
         <action
             android:id="@+id/action_logIn_to_resetPasswordFragment4"
-            app:destination="@id/resetPasswordFragment4" />
+            app:destination="@id/ResetPasswordFragment4" />
+        <action
+            android:id="@+id/action_LoginFragment_to_signUpFragment"
+            app:destination="@id/SignUpFragment" />
     </fragment>
     <fragment
-        android:id="@+id/signUp"
-        android:name="com.example.newsappproject.SignUp"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_signUp_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_signUp_to_logIn"
-            app:destination="@id/logIn" />
-    </fragment>
-    <fragment
-        android:id="@+id/newsFragment"
+        android:id="@+id/NewsFragment"
         android:name="com.example.newsappproject.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
-        android:id="@+id/resetPasswordFragment4"
+        android:id="@+id/ResetPasswordFragment4"
         android:name="com.example.newsappproject.ResetPasswordFragment"
         android:label="fragment_reset_password"
         tools:layout="@layout/fragment_reset_password" />
+    <fragment
+        android:id="@+id/SignUpFragment"
+        android:name="com.example.newsappproject.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_LoginFragment"
+            app:destination="@id/LoginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
 </navigation>
