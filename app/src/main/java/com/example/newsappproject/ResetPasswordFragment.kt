@@ -1,32 +1,38 @@
 package com.example.newsappproject
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.example.newsappproject.databinding.FragmentResetPasswordBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private  lateinit var binding : FragmentResetPasswordBinding
 
-    @SuppressLint("MissingInflatedId")
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_reset_password, container, false)
-
+        binding = FragmentResetPasswordBinding.inflate(layoutInflater)
         auth = FirebaseAuth.getInstance()
 
-        val emailEditText = view.findViewById<EditText>(R.id.emailEditText)
-        val resetButton = view.findViewById<Button>(R.id.resetButton)
+        setupListeners()
+        return binding.root
+    }
 
+    private fun setupListeners(){
+        binding.backButton.setOnClickListener {
+            it.findNavController().navigate(R.id.action_ResetPasswordFragment4_to_LoginFragment)
+        }
+        val emailEditText = binding.emailEditText
+        val resetButton = binding.resetButton
         resetButton.setOnClickListener {
             val email = emailEditText.text.toString().trim()
 
@@ -44,7 +50,5 @@ class ResetPasswordFragment : Fragment() {
                     }
                 }
         }
-
-        return view
     }
 }

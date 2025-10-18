@@ -13,7 +13,10 @@ import androidx.core.graphics.toColorInt
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,5 +44,9 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
+
+
 
 }

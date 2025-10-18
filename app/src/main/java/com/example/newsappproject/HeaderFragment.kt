@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.PopupMenu
+import androidx.navigation.fragment.findNavController
 import com.example.newsappproject.databinding.FragmentHeaderBinding
-import com.example.newsappproject.databinding.FragmentSignUpBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class HeaderFragment : Fragment() {
     private lateinit var binding: FragmentHeaderBinding
@@ -22,12 +22,13 @@ class HeaderFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHeaderBinding.inflate(inflater, container, false)
-
+        binding.starIcon.setOnClickListener {
+            findNavController().navigate(R.id.action_HomeFragment_to_favouritesFragment)
+        }
         binding.menuIcon.setOnClickListener { view ->
             val popup = PopupMenu(requireContext(), view)
             popup.menuInflater.inflate(R.menu.header_menu, popup.menu)
 
-            // Force show icons AND text
             try {
                 val fields = popup.javaClass.getDeclaredField("mPopup")
                 fields.isAccessible = true
@@ -42,16 +43,19 @@ class HeaderFragment : Fragment() {
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.menu_settings -> {
-                        // Handle Settings
+                        findNavController().navigate(R.id.action_HomeFragment_to_settingsFragment)
                         true
                     }
                     R.id.menu_logout -> {
-                        // Handle Logout
+                        FirebaseAuth.getInstance().signOut()
+                        findNavController().navigate(R.id.action_HomeFragment_to_LoginFragment)
                         true
                     }
                     else -> false
                 }
             }
+
+
 
             popup.show()
         }
