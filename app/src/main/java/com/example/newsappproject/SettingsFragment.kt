@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.newsappproject.databinding.FragmentSettingsBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class SettingsFragment : Fragment() {
@@ -20,7 +22,12 @@ class SettingsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+    binding.logoutBtn.setOnClickListener {
+        val auth = FirebaseAuth.getInstance()
+        auth.signOut()
+        findNavController().navigate(R.id.action_settingsFragment_to_LoginFragment)
 
+    }
         return binding.root
     }
 
