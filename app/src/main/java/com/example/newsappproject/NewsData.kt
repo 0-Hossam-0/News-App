@@ -1,9 +1,9 @@
 package com.example.newsappproject
 
 data class NewsData(
-    val title: String,
+    val articleText: String,
     val backgroundImage: Int,
     val icon: Int,
-    val startColor: Int,
-    val endColor: Int
+    val dateText: String,
+    val userName: String
 )

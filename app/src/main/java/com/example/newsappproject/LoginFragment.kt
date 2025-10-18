@@ -55,7 +55,9 @@ class LoginFragment : Fragment() {
             val allValid = isInputsValid["email"] == true && isInputsValid["password"] == true
             binding.logInBtn.isEnabled = allValid
         }
-
+        binding.forgetPasswordBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_logIn_to_resetPasswordFragment4)
+        }
     }
 
     private fun setErrorUI(pair :Pair<EditText, TextView>){
