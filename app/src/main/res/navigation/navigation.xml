@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_newsFragment"
             app:destination="@id/NewsFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_settingsFragment2"
+            app:destination="@id/settingsFragment2" />
     </fragment>
     <fragment
         android:id="@+id/LoginFragment"
@@ -49,6 +52,15 @@
             app:destination="@id/LoginFragment" />
         <action
             android:id="@+id/action_signUpFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment2"
+        android:name="com.example.newsappproject.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment2_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>

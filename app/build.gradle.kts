@@ -46,7 +46,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation("com.squareup.retrofit2:retrofit:3.0.0")
-//    implementation("com.squareup.retrofit2:converter-gson:latest.version")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation(libs.firebase.auth)
     implementation(libs.androidx.annotation)
     implementation(libs.androidx.lifecycle.livedata.ktx)

@@ -5,71 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center"
     android:padding="24dp"
-    tools:context=".MainActivity">
+    android:background="#101935"
+    tools:context=".SettingsFragment">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:text="My Profile"
-        android:textSize="24sp" />
+        android:text="Select Country"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:layout_marginBottom="16dp" />
 
-    <ImageView
-        android:layout_width="152dp"
-        android:layout_height="152dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/img" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:id="@+id/name_Et"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:hint="Name" />
-
-    <EditText
+    <Spinner
+        android:id="@+id/spinnerCountry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Email_Et"
-        android:layout_marginTop="8dp"
-        android:hint="Email" />
-
-    <Button
-        android:id="@+id/update_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Update"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#7B68EE" />
 
     <TextView
+        android:id="@+id/selectedcountry_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Theme"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <androidx.appcompat.widget.SwitchCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dark Mode"
-        android:id="@+id/switchTheme"
+        android:text="Selected Country: None"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="40dp" />
 
     <Button
         android:id="@+id/logout_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="#8C1F1F"
-        android:text="logout"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:text="Logout"
+        android:backgroundTint="#E74C3C"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>
