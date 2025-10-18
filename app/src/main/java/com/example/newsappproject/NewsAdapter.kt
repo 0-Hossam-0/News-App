@@ -24,12 +24,12 @@ class NewsAdapter(private val newsList: List<Article>) : RecyclerView.Adapter<Ne
     ) {
         val news = newsList[position]
 
-        holder.articleText?.text = news.title
+        holder.articleText?.text = news.title ?: "No title available"
         Glide.with(holder.itemView.context)
             .load(news.urlToImage)
             .into(holder.articleImage!!)
-        holder.dateText?.text = news.publishedAt
-        holder.userName?.text = news.author
+        holder.dateText?.text = news.publishedAt?: "Unknown date"
+        holder.userName?.text = news.author?: "Unknown author"
     }
 
     override fun getItemCount(): Int = newsList.size
