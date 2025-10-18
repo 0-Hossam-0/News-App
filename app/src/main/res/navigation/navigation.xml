@@ -13,7 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_newsFragment"
             app:destination="@id/NewsFragment" />
-        <action app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_HomeFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
